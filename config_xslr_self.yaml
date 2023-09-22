@@ -1,0 +1,236 @@
+_name: null
+common:
+  _name: null
+  no_progress_bar: false
+  log_interval: 200
+  log_format: json
+  log_file: null
+  tensorboard_logdir: tb
+  wandb_project: null
+  azureml_logging: false
+  seed: 1
+  cpu: false
+  tpu: false
+  bf16: false
+  memory_efficient_bf16: false
+  fp16: true
+  memory_efficient_fp16: false
+  fp16_no_flatten_grads: false
+  fp16_init_scale: 128
+  fp16_scale_window: null
+  fp16_scale_tolerance: 0.0
+  min_loss_scale: 0.0001
+  threshold_loss_scale: null
+  user_dir: null
+  empty_cache_freq: 0
+  all_gather_list_size: 16384
+  model_parallel_size: 1
+  quantization_config_path: null
+  profile: false
+  reset_logging: false
+  suppress_crashes: false
+  use_plasma_view: false
+  plasma_path: /tmp/plasma
+common_eval:
+  _name: null
+  path: null
+  post_process: null
+  quiet: false
+  model_overrides: '{}'
+  results_path: null
+distributed_training:
+  distributed_world_size: 128
+  ddp_backend: legacy_ddp
+dataset:
+  _name: null
+  num_workers: 6
+  skip_invalid_size_inputs_valid_test: true
+  max_tokens: 1200000
+  batch_size: null
+optimization:
+  _name: null
+  max_epoch: 0
+  max_update: 1250000
+  stop_time_hours: 0.0
+  clip_norm: 0.0
+  sentence_avg: false
+  update_freq:
+  - 1
+  lr:
+  - 0.0006
+  stop_min_lr: -1.0
+  use_bmuf: false
+checkpoint:
+  _name: null
+  save_dir: /data/lujingze/recurrent/wav2vec2_test/fairseq-main/examples/wav2vec/self_train_checkpoint/
+  restore_file: /data/lujingze/data0/pretrain_pt/xlsr2_300m.pt
+  finetune_from_model: null
+  reset_dataloader: true
+  reset_lr_scheduler: false
+  reset_meters: false
+  reset_optimizer: false
+  optimizer_overrides: '{}'
+  save_interval: 1
+  save_interval_updates: 25000
+  keep_interval_updates: 1
+  keep_interval_updates_pattern: -1
+  keep_last_epochs: -1
+  keep_best_checkpoints: -1
+  no_save: false
+  no_epoch_checkpoints: true
+  no_last_checkpoints: false
+  no_save_optimizer_state: false
+  best_checkpoint_metric: loss
+  maximize_best_checkpoint_metric: false
+  patience: -1
+  checkpoint_suffix: ''
+  checkpoint_shard_count: 1
+  load_checkpoint_on_all_dp_ranks: false
+  write_checkpoints_asynchronously: false
+  model_parallel_size: 1
+bmuf:
+  _name: null
+  block_lr: 1.0
+  block_momentum: 0.875
+  global_sync_iter: 50
+  warmup_iterations: 500
+  use_nbm: false
+  average_sync: false
+  distributed_world_size: 128
+generation:
+  _name: null
+  beam: 5
+  nbest: 1
+  max_len_a: 0.0
+  max_len_b: 200
+  min_len: 1
+  match_source_len: false
+  unnormalized: false
+  no_early_stop: false
+  no_beamable_mm: false
+  lenpen: 1.0
+  unkpen: 0.0
+  replace_unk: null
+  sacrebleu: false
+  score_reference: false
+  prefix_size: 0
+  no_repeat_ngram_size: 0
+  sampling: false
+  sampling_topk: -1
+  sampling_topp: -1.0
+  constraints: null
+  temperature: 1.0
+  diverse_beam_groups: -1
+  diverse_beam_strength: 0.5
+  diversity_rate: -1.0
+  print_alignment: null
+  print_step: false
+  lm_path: null
+  lm_weight: 0.0
+  iter_decode_eos_penalty: 0.0
+  iter_decode_max_iter: 10
+  iter_decode_force_max_iter: false
+  iter_decode_with_beam: 1
+  iter_decode_with_external_reranker: false
+  retain_iter_history: false
+  retain_dropout: false
+  retain_dropout_modules: null
+  decoding_format: null
+  no_seed_provided: false
+eval_lm:
+  _name: null
+  output_word_probs: false
+  output_word_stats: false
+  context_window: 0
+  softmax_batch: 9223372036854775807
+interactive:
+  _name: null
+  buffer_size: 0
+  input: '-'
+model:
+  _name: wav2vec2
+  extractor_mode: layer_norm
+  encoder_layers: 24
+  encoder_embed_dim: 1024
+  encoder_ffn_embed_dim: 4096
+  encoder_attention_heads: 16
+  activation_fn: gelu
+  dropout: 0.0
+  attention_dropout: 0.0
+  activation_dropout: 0.0
+  encoder_layerdrop: 0.0
+  dropout_input: 0.0
+  dropout_features: 0.0
+  final_dim: 768
+  layer_norm_first: true
+  conv_feature_layers: '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]'
+  conv_bias: true
+  logit_temp: 0.1
+  quantize_targets: true
+  quantize_input: false
+  same_quantizer: false
+  target_glu: false
+  feature_grad_mult: 1.0
+  latent_vars: 320
+  latent_groups: 2
+  latent_dim: 0
+  mask_length: 10
+  mask_prob: 0.65
+  mask_selection: static
+  mask_other: 0.0
+  no_mask_overlap: false
+  mask_min_space: 1
+  mask_channel_length: 10
+  mask_channel_prob: 0.0
+  mask_channel_selection: static
+  mask_channel_other: 0.0
+  no_mask_channel_overlap: false
+  mask_channel_min_space: 1
+  num_negatives: 100
+  negatives_from_everywhere: false
+  cross_sample_negatives: 0
+  codebook_negatives: 0
+  conv_pos: 128
+  conv_pos_groups: 16
+  latent_temp:
+  - 2.0
+  - 0.1
+  - 0.999995
+task:
+  _name: audio_pretraining
+  data: ???
+  labels: null
+  sample_rate: 16000
+  normalize: true
+  enable_padding: false
+  max_sample_size: 320000
+  min_sample_size: 32000
+  num_batch_buckets: 0
+  precompute_mask_indices: false
+  tpu: false
+criterion:
+  _name: wav2vec
+  infonce: true
+  loss_weights:
+  - 0.1
+  - 0.0
+  log_keys:
+  - prob_perplexity
+  - code_perplexity
+  - temp
+optimizer:
+  _name: adam
+  adam_betas: (0.9,0.98)
+  adam_eps: 1.0e-06
+  weight_decay: 0.01
+  use_old_adam: false
+  tpu: false
+  lr:
+  - 0.0006
+lr_scheduler:
+  _name: fixed
+  lr:
+  - 1.0e-06
+scoring: null
+bpe: null
+tokenizer: null
